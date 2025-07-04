@@ -33,14 +33,26 @@ const uploadOnCloudinary = async (fileURLToPath) => {
       folder: "stream-app",
     });
     fs.unlink(fileURLToPath, (err) => {
-        if (err) {
-          console.error("Error deleting file:", err);
-        } else {
-          console.log("File deleted successfully from server, uploaded on cloud.");
-        }
-      });
-    // console.log("file uploaded successfully:", uploadResult.url);
-    return uploadResult.url;
+      if (err) {
+        console.error("Error deleting file:", err);
+      } else {
+        console.log(
+          "File deleted successfully from server, uploaded on cloud."
+        );
+      }
+    });
+
+    // Check if the uploaded file is a video and return duration if available
+    if (uploadResult.resource_type === "video" && uploadResult.duration) {
+      return {
+        url: uploadResult.secure_url,
+        duration: uploadResult.duration,
+        resource_type: uploadResult.resource_type,
+      };
+    }
+
+    // For non-video files, return just the URL (maintaining backward compatibility)
+    return uploadResult.secure_url;
   } catch (error) {
     console.error("Error uploading file to Cloudinary:", error);
 
@@ -54,7 +66,7 @@ const uploadOnCloudinary = async (fileURLToPath) => {
         }
       });
     }
-    return null; 
+    return null;
   }
 };
 

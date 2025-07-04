@@ -26,9 +26,11 @@ app.use(express.urlencoded({}));
 app.use(express.static("public"));
 app.use(cookieParser());
 
-// import routes
+// import user route
 import userRouter from "./routes/user.routes.js";
-
 app.use("/api/v1/users", userRouter);
+// import playlist route
+import playlistRouter from "./routes/playlist.routes.js";
+app.use("/api/v1/playlists", playlistRouter);
 
 export default app;
