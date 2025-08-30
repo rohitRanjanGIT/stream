@@ -19,32 +19,26 @@ userRouter.route("/logout").post(upload.none(), verifyJWT, uc.logoutUser);
 
 userRouter.route("/refresh-token").post(upload.none(), uc.refreshAccessToken);
 
-userRouter.route("/change-password").post(verifyJWT,  upload.none(), uc.changeCurrentPassword);
+userRouter
+  .route("/change-password")
+  .post(verifyJWT, upload.none(), uc.changeCurrentPassword);
 
 userRouter.route("/currentUser").get(verifyJWT, uc.getCurrentUser);
 
-userRouter.route("/update").put(
-  verifyJWT,
-  upload.none(),
-  uc.updateUser
-);
+userRouter.route("/update").put(verifyJWT, upload.none(), uc.updateUser);
 
-userRouter.route("/update-avatar").put(
-  verifyJWT,
-  upload.single("avatar"),
-  uc.updateUserAvatar
-);
+userRouter
+  .route("/update-avatar")
+  .put(verifyJWT, upload.single("avatar"), uc.updateUserAvatar);
 
-userRouter.route("/update-cover-image").put(
-  verifyJWT,
-  upload.single("coverImage"),
-  uc.updateUserCoverImage
-);
+userRouter
+  .route("/update-cover-image")
+  .put(verifyJWT, upload.single("coverImage"), uc.updateUserCoverImage);
 
 userRouter.route("/delete").delete(verifyJWT, uc.deleteUser);
 
 userRouter.route("/c/:channelId").get(uc.getChannelInfo);
 
-userRouter.route("/history").get(verifyJWT, uc.getUserHistory);
+userRouter.route("/history").get(verifyJWT, uc.getWatchHistory);
 
 export default userRouter;

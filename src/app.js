@@ -30,7 +30,7 @@ app.use(cookieParser());
 import userRouter from "./routes/user.routes.js";
 app.use("/api/v1/users", userRouter);
 // import playlist route
-import playlistRouter from "./routes/playlist.routes.js";
+import playlistRouter from "./routes/playlisy.route.js";
 app.use("/api/v1/playlists", playlistRouter);
 
 export default app;
